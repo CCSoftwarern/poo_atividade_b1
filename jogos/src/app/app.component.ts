@@ -26,9 +26,6 @@ export class AppComponent {
     anoPublicacao: number=0;
     fabricante: string='';
     nJogadoresIdade: number=0;
-    regras: string='';
-  
-  
   
     adicionarJogo() {
 
