@@ -1,0 +1,105 @@
+<app-header></app-header>
+<section class="py-5 text-center container">
+    <div class="row py-lg-3">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Biblioteca de Jogos</h1>
+        <p class="lead text-muted">Cadastre aqui os jogos de Cartas e Tabuleiro</p>
+      </div>
+    </div>
+  </section>
+
+<hr />
+
+<div class="container">
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle-fill"></i> Novo jogo</button>
+ </div>
+  <div class="row row-cols-1 row-cols-md-6 g-4 mt-2">
+
+    @for (item of nwBiblioteca.listaJogos; track item.titulo; let indice = $index) {
+    <div class="col">
+      <div class="card h-100 shadow">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.titulo }}</h5>
+          <p class="card-text">Fabricante: {{ item.fabricante }}</p>
+          <p class="card-text">Publicado em: {{ item.anoPublicacao }}</p>
+          <p class="card-text">Regras: {{ item.exibirRegras() }}</p>
+        </div>
+        <button class="btn btn-danger" (click)="removerItem(indice)"> <i class="bi bi-trash3-fill"></i> Remover</button>
+       
+      </div>
+  
+    </div>
+    } @empty {
+      <tr>
+        <td colspan="5">Nenhum jogo adicionado até o momento</td>
+      </tr>
+      }
+
+</div>
+
+<!-- modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Novo jogo de Tabuleiro</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form>
+          <table>
+            <tr>
+              <td>Titulo:</td>
+              <td>
+                <select class="form-select" id="selectOpcao" name="opcao" [(ngModel)]="opcaoSelecionada" required> 
+                  @for (item of opcoesSelect; track $index) {
+                    <option [value]="item.nmOpcao">{{item.nmOpcao}}</option>
+                  }
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Titulo:</td>
+              <td>
+               <input class="form-control" type="text" name="titulo" [(ngModel)]="titulo" />
+              </td>
+            </tr>
+            <tr>
+              <td>Fabricante:</td>
+              <td>
+                <input name="fabricante" class="form-control" type="text"  [(ngModel)]="fabricante" />
+              </td>
+            </tr>
+            <tr>
+              <td>Ano:</td>
+              <td>
+                <input name="enderecoEntrega" class="form-control" type="number" [(ngModel)]="anoPublicacao" />
+              </td>
+            </tr>
+            <tr>
+            <td>Idade/Número de Jogadores</td>
+              <td>
+                <input name="enderecoEntrega" class="form-control" type="number" [(ngModel)]="nJogadoresIdade" />
+              </td>
+            </tr>
+          </table>
+        </form>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"(click)="adicionarJogo()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+
+
+
