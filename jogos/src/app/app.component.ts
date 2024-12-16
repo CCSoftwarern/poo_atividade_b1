@@ -46,8 +46,5 @@ export class AppComponent {
     }
   
   
-  
-    limparFormulario(form: any): void { form.resetForm(); }
-  
   }
   
